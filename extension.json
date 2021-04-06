@@ -2,7 +2,7 @@
     "identifier": "genealabs.intelephense",
     "name": "intelephense",
     "organization": "GeneaLabs",
-    "description": "Lorem ipsum, dolor sit amet.",
+    "description": "Nova wrapper of the fabulous Intelephense language server from Ben Mewburn.",
     "version": "0.1.0",
     "categories": ["languages"],
 
@@ -13,10 +13,14 @@
         "filesystem": "readwrite"
     },
 
+    "bugs": "https://github.com/GeneaLabs/panic-nova-intelephense/issues",
+    "repository": "https://github.com/GeneaLabs/panic-nova-intelephense",
+
     "config": [
         {
             "key": "example.language-server-path",
             "title": "Language Server Path",
+            "description": "Only needed if you would like to specify your locally installed intelephense library.",
             "type": "path",
             "placeholder": "/usr/local/bin/example"
         }

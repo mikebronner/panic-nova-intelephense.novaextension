@@ -1,6 +1,8 @@
 # Changelog
 ## [Upcoming]
 - Further refinement and research into the initialization and indexing issues.
+- Add language server configuration settings.
+- Add ability to add license key to active "pro" functionality.
 
 ## [Known Issues]
 - There are initialization errors with the language server that are currently
