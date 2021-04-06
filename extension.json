@@ -1,0 +1,24 @@
+{
+    "identifier": "genealabs.intelephense",
+    "name": "intelephense",
+    "organization": "GeneaLabs",
+    "description": "Lorem ipsum, dolor sit amet.",
+    "version": "0.1.0",
+    "categories": ["languages"],
+
+    "main": "main.js",
+
+    "entitlements": {
+        "process": true,
+        "filesystem": "readwrite"
+    },
+
+    "config": [
+        {
+            "key": "example.language-server-path",
+            "title": "Language Server Path",
+            "type": "path",
+            "placeholder": "/usr/local/bin/example"
+        }
+    ]
+}
