@@ -1,12 +1,21 @@
 {
     "identifier": "genealabs.intelephense",
-    "name": "intelephense",
+    "name": "Intelephense",
     "organization": "GeneaLabs",
     "description": "Nova wrapper of the fabulous Intelephense language server from Ben Mewburn.",
     "version": "0.1.0",
     "categories": ["languages"],
 
     "main": "main.js",
+
+    "activationEvents": [
+        "onLanguage:php",
+        "onLanguage:blade",
+        "onWorkspaceContains:composer.json",
+        "onWorkspaceContains:phpcs.xml",
+        "onWorkspaceContains:phpmd.xml",
+        "onWorkspaceContains:phpunit.xml"
+    ],
 
     "entitlements": {
         "process": true,
@@ -18,11 +27,20 @@
 
     "config": [
         {
-            "key": "example.language-server-path",
-            "title": "Language Server Path",
-            "description": "Only needed if you would like to specify your locally installed intelephense library.",
-            "type": "path",
-            "placeholder": "/usr/local/bin/example"
+            "key": "genealabs.intelephense.licenseKey",
+            "title": "License Key",
+            "link": "https://intelephense.com",
+            "description": "Enter your license key to activate premium features.",
+            "type": "string"
+        },
+        {
+            "key": "intelephense.files.maxSize",
+            "title": "Maximum File Size",
+            "description": "Maximum file size in bytes.",
+            "type": "number",
+            "default": 3000000,
+            "max": 999999999,
+            "min": 500000
         }
     ]
 }

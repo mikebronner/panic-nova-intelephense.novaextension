@@ -1,9 +1,11 @@
+var workspaceStoragePath = nova.path.join(nova.extension.workspaceStoragePath, "intelephense");
+var globalStoragePath = nova.path.join(nova.extension.globalStoragePath, "intelephense");
 var langserver = null;
 var install = async function () {
     installation = new Process(
         "/usr/bin/env",
         {
-            args: ["npm", "install"],
+            args: ["npm", "install", "intelephense@1.5.4"],
             cwd: nova.extension.workspaceStoragePath,
         }
     );
@@ -24,6 +26,9 @@ exports.activate = function() {
     try {
         console.log("creating workspace storage path:", nova.extension.workspaceStoragePath);
         nova.fs.mkdir(nova.extension.workspaceStoragePath);
+        nova.fs.mkdir(nova.extension.globalStoragePath);
+        nova.fs.mkdir(workspaceStoragePath);
+        nova.fs.mkdir(globalStoragePath);
         console.log("created workspace storage path");
     } catch (error) {
         // fail silently
@@ -49,6 +54,9 @@ class IntelephenseLanguageServer {
         nova.config.observe('genealabs.intelephense.language-server-path', function (path) {
             this.start(path);
         }, this);
+        nova.config.observe('genealabs.intelephense.license-key', function (path) {
+            this.start(path);
+        }, this);
         // also observer license key setting
     }
 
@@ -58,14 +66,6 @@ class IntelephenseLanguageServer {
     }
 
     start(path) {
-        let storagePath = nova.path.join(
-            nova.extension.workspaceStoragePath,
-            "intelephense"
-        );
-        let globalStoragePath = nova.path.join(
-            nova.extension.globalStoragePath,
-            "intelephense"
-        );
         console.log("starting language server");
 
         if (this.languageClient) {
@@ -86,21 +86,21 @@ class IntelephenseLanguageServer {
 
         // Create the client
         var serverOptions = {
-            args: ["node", path, '--stdio'],
+            args: ["node", path, "--stdio", "--nolazy", "--trace-warnings", "--preserve-symlinks", "--inspect=6039"],
             path: "/usr/bin/env",
         };
         var clientOptions = {
             syntaxes: ['php'],
             initializationOptions: {
-                clearCache: false,
+                clearCache: true,
                 globalStoragePath: globalStoragePath,
-                storagePath: storagePath,
-                // add license key option
+                storagePath: workspaceStoragePath,
+                licenseKey: nova.config.get('genealabs.intelephense.licenseKey', 'string'),
             },
         };
         var client = new LanguageClient(
             'intelephense',
-            'Intelephense Language Server',
+            'intelephense',
             serverOptions,
             clientOptions
         );
@@ -131,4 +131,3 @@ class IntelephenseLanguageServer {
         }
     }
 }
-
