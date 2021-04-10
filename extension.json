@@ -43,7 +43,8 @@
             "title": "License Key",
             "link": "https://intelephense.com",
             "description": "Enter your license key to activate premium features.",
-            "type": "string"
+            "type": "string",
+            "default": ""
         },
         {
             "key": "genealabs.intelephense.debugging",

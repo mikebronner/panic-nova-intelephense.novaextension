@@ -1,39 +1,16 @@
-<!--
-👋 Hello! As Nova users browse the extensions library, a good README can help them understand what your extension does, how it works, and what setup or configuration it may require.
-
-Not every extension will need every item described below. Use your best judgement when deciding which parts to keep to provide the best experience for your new users.
-
-💡 Quick Tip! As you edit this README template, you can preview your changes by selecting **Extensions → Activate Project as Extension**, opening the Extension Library, and selecting "intelephense" in the sidebar.
-
-Let's get started!
--->
-
-<!--
-🎈 Include a brief description of the features your extension provides. For example:
--->
-
-<!-- **intelephense** provides deep integration with **An Important Language**, including the most important feature, something that's really helpful, and _a little-known secret!_ -->
-
-<!--
-🎈 It can also be helpful to include a screenshot or GIF showing your extension in action:
--->
-
-<!-- ![](https://nova.app/images/en/dark/editor.png) -->
-
-## Warning
-
-This extension is currently in beta. It may or may not work. Please see the
-  changelog for details.
-
-## Requirements
-
-<!--
-🎈 If your extension depends on external processes or tools that users will need to have, it's helpful to list those and provide links to their installers:
--->
-<!--
-✨ Providing tips, tricks, or other guides for installing or configuring external dependencies can go a long way toward helping your users have a good setup experience:
--->
-
+## Known Issues
+This extension is undergoing development, and probably has errors. The following
+  is a non-exhaustive list of issues being tracked.
+- There are initialization errors with the language server that are currently
+  unresolved. A future update by the language server may or may not resolve this
+  issue. These issues are likely upstream from Intelephense.
+- Nova doesn't display the completion hints very well, and some completions may
+  not show at all, due to being overlaid by the suplemental information.
+- Language server configurations are not not being detected, and currently fall
+  back to defaults.
+- Currently does not support PHP 8.0+. This will be resolved once we upgrade
+  Intelephense to 1.7, which hopefully will resolve some of the other above-
+  mentioned issues as well.
 
 ## Commands
 
@@ -41,19 +18,6 @@ This extension is currently in beta. It may or may not work. Please see the
 There are two ways you can restart Intelephense:
 - Open command palette and type "Restart Intelephense", then hit enter to execute.
 - Navigate to Extensions > Intelephense > Restart Intelephense.
-
-<!--
-🎈 If your extension provides features that are invoked manually, consider describing those options for users:
--->
-
-<!-- To run intelephense:
-
-- Select the **Editor → intelephense** menu item; or
-- Open the command palette and type `intelephense` -->
-
-<!--
-🎈 Alternatively, if your extension runs automatically (as in the case of a validator), consider showing users what they can expect to see:
--->
 
 ## Features
 Intelephense runs any time you open a local PHP project, automatically lints all

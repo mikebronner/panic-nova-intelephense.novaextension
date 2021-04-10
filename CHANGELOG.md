@@ -5,15 +5,6 @@
   is addressed there.
 - Add language server configuration settings.
 
-## [Known Issues]
-- There are initialization errors with the language server that are currently
-  unresolved. A future update by the language server may or may not resolve this
-  issue. These issues are likely upstream from Intelephense.
-- Nova doesn't display the completion hints very well, and some completions may
-  not show at all, due to being overlaid by the suplemental information.
-- Language server configurations are not not being detected, and currently fall
-  back to defaults.
-
 ## [0.1.2] - 2021-04-10
 ### Added
 - command to restart the language server.
