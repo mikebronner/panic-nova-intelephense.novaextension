@@ -5,6 +5,10 @@
   is addressed there.
 - Add language server configuration settings.
 
+## [0.1.3] - 2021-04-10
+### Updated
+- documentation.
+
 ## [0.1.2] - 2021-04-10
 ### Added
 - command to restart the language server.
