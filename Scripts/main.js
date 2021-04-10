@@ -1,79 +1,133 @@
 var workspaceStoragePath = nova.path.join(nova.extension.workspaceStoragePath, "intelephense");
 var globalStoragePath = nova.path.join(nova.extension.globalStoragePath, "intelephense");
 var langserver = null;
+var requiredVersion = "1.5.4";
 var install = async function () {
     installation = new Process(
         "/usr/bin/env",
         {
-            args: ["npm", "install", "intelephense@1.5.4"],
+            args: ["npm", "install", "intelephense@" + requiredVersion],
             cwd: nova.extension.workspaceStoragePath,
         }
     );
     installation.onStdout(function (output) {
-        console.log("installation:", output);
+        if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+            console.log("Installation Output", output.trim());
+        }
     });
     installation.onDidExit(function (status) {
-        console.log("installation finished:", status);
+        if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+            console.log("Installation completed with status", status);
+        }
+
         langserver = new IntelephenseLanguageServer();
     });
-    console.log("installation started");
+
+    if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+        console.log("Starting Intelephense installation.");
+    }
+
     installation.start();
 };
+var installIfMissing = async function () {
+    let installedVersion = "";
+    let process = new Process(
+        "/usr/bin/env",
+        {
+            args: ["npm", "list", "--depth 0", "--parseable", "--long", "intelephense"],
+            cwd: nova.extension.workspaceStoragePath,
+        }
+    );
+    process.onStdout(function (output) {
+        installedVersion = ((output.split(":")[1] || "").split("@")[1] || "");
 
-exports.activate = function() {
-    console.log("activating extension");
+        if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+            console.log("Currenlty installed version", installedVersion);
+        }
+    })
+    process.onDidExit(function (status) {
+        console.log(installedVersion, requiredVersion);
+        if (installedVersion !== requiredVersion) {
+            install();
+
+            return;
+        }
+
+        langserver = new IntelephenseLanguageServer();
+    });
+    process.start();
+};
+var activate = async function () {
+    if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+        console.log("Activating extension.");
+    }
 
     try {
-        console.log("creating workspace storage path:", nova.extension.workspaceStoragePath);
+        if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+            console.log("Creating extension workspace storage path:", nova.extension.workspaceStoragePath);
+            console.log("Creating extension global storage path:", nova.extension.globalStoragePath);
+            console.log("Creating Intelephense workspace storage path:", workspaceStoragePath);
+            console.log("Creating Intelephense global storage path:", globalStoragePath);
+        }
+
         nova.fs.mkdir(nova.extension.workspaceStoragePath);
         nova.fs.mkdir(nova.extension.globalStoragePath);
         nova.fs.mkdir(workspaceStoragePath);
         nova.fs.mkdir(globalStoragePath);
-        console.log("created workspace storage path");
     } catch (error) {
-        // fail silently
-        console.log("failed", error);
+        console.error("Directory creation failed:", error);
     }
 
-    install();
-}
-
-exports.deactivate = function() {
-    // Clean up state before the extension is deactivated
+    await installIfMissing();
+};
+var deactivate = async function () {
     if (langserver) {
         langserver.deactivate();
         langserver = null;
     }
-}
+};
+var restart = async function () {
+    await deactivate();
+    await activate();
+};
 
+nova.commands.register("genealabs.intelephense.restart", restart);
+
+exports.activate = function() {
+    activate();
+};
+
+exports.deactivate = function() {
+    deactivate();
+}
 
 class IntelephenseLanguageServer {
     constructor() {
-        console.log("constructing language server");
-        // Observe the configuration setting for the server's location, and restart the server on change
-        nova.config.observe('genealabs.intelephense.language-server-path', function (path) {
-            this.start(path);
-        }, this);
-        nova.config.observe('genealabs.intelephense.license-key', function (path) {
-            this.start(path);
-        }, this);
-        // also observer license key setting
+        if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+            console.log("Constructing language server.");
+        }
+
+        this.start();
     }
 
     deactivate() {
-        console.log("deactivating language server");
+        if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+            console.log("Deactivating language server.");
+        }
+
         this.stop();
     }
 
     start(path) {
-        console.log("starting language server");
-
         if (this.languageClient) {
             this.languageClient.stop();
             nova.subscriptions.remove(this.languageClient);
         }
 
-        // Use the default server path
+        if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+            console.log("Starting language server.");
+        }
+
         if (!path) {
             path = nova.path.join(
                 nova.extension.workspaceStoragePath,
@@ -84,47 +138,47 @@ class IntelephenseLanguageServer {
             );
         }
 
-        // Create the client
         var serverOptions = {
-            args: ["node", path, "--stdio", "--nolazy", "--trace-warnings", "--preserve-symlinks", "--inspect=6039"],
+            args: ["node", path, "--stdio"],
             path: "/usr/bin/env",
+            type: "stdio",
         };
         var clientOptions = {
             syntaxes: ['php'],
             initializationOptions: {
-                clearCache: true,
+                clearCache: false,
                 globalStoragePath: globalStoragePath,
-                storagePath: workspaceStoragePath,
                 licenseKey: nova.config.get('genealabs.intelephense.licenseKey', 'string'),
+                storagePath: workspaceStoragePath,
             },
         };
         var client = new LanguageClient(
-            'intelephense',
-            'intelephense',
+            'genealabs-intelephense',
+            'Intelephense LSP',
             serverOptions,
             clientOptions
         );
 
         try {
-            console.log("starting client");
-            // Start the client
-            client.start();
+            if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+                console.log("Starting client.");
+            }
 
-            // Add the client to the subscriptions to be cleaned up
+            client.start();
             nova.subscriptions.add(client);
             this.languageClient = client;
         }
-        catch (err) {
-            // If the .start() method throws, it's likely because the path to the language server is invalid
-
-            if (nova.inDevMode()) {
-                console.error(err);
-            }
+        catch (error) {
+           console.error("Error when creating client:", error);
         }
     }
 
     stop() {
         if (this.languageClient) {
+            if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
+                console.log("Stopping language client.");
+            }
+
             this.languageClient.stop();
             nova.subscriptions.remove(this.languageClient);
             this.languageClient = null;
