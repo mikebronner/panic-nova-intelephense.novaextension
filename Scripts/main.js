@@ -1,7 +1,7 @@
 var workspaceStoragePath = nova.path.join(nova.extension.workspaceStoragePath, "intelephense");
 var globalStoragePath = nova.path.join(nova.extension.globalStoragePath, "intelephense");
 var langserver = null;
-var requiredVersion = "1.5.4";
+var requiredVersion = "1.7.0";
 var install = async function () {
     installation = new Process(
         "/usr/bin/env",
@@ -46,7 +46,6 @@ var installIfMissing = async function () {
         }
     })
     process.onDidExit(function (status) {
-        console.log(installedVersion, requiredVersion);
         if (installedVersion !== requiredVersion) {
             install();
 

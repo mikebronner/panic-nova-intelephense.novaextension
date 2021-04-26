@@ -1,9 +1,11 @@
 # Changelog
 ## [Upcoming]
-- Further refinement and research into the initialization and indexing issues.
-  Currently waiting on the next release of intelephense to see if the proclem
-  is addressed there.
 - Add language server configuration settings.
+
+## [0.1.4] - 2021-04-26
+### Updated
+- intelephense version to 1.7.0. This resolved the initialization errors and now
+  also provides PHP 8 support.
 
 ## [0.1.3] - 2021-04-10
 ### Updated
