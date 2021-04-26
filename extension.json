@@ -3,7 +3,7 @@
     "name": "Intelephense",
     "organization": "GeneaLabs",
     "description": "Nova wrapper of the fabulous Intelephense language server from Ben Mewburn.",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "categories": ["languages"],
 
     "main": "main.js",

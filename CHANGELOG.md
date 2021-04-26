@@ -1,6 +1,14 @@
 # Changelog
 ## [Upcoming]
+- Further refinement and research into the initialization and indexing issues.
+  Currently waiting on the next release of intelephense to see if the proclem
+  is addressed there.
 - Add language server configuration settings.
+
+## [0.1.5] - 2021-04-26
+### Reverted
+- changes made in 0.1.4 back out, as indexing would no longer complete. Further
+  investigation is necessary.
 
 ## [0.1.4] - 2021-04-26
 ### Updated
