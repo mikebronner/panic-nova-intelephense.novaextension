@@ -1,19 +1,16 @@
 ## Known Issues
 This extension is undergoing development, and probably has errors. The following
   is a non-exhaustive list of issues being tracked.
-- There are initialization errors with the language server that are currently
+<!-- - There are initialization errors with the language server that are currently
   unresolved. A future update by the language server may or may not resolve this
-  issue. These issues are likely upstream from Intelephense.
-- Nova doesn't display the completion hints very well, and some completions may
-  not show at all, due to being overlaid by the suplemental information.
+  issue. These issues are likely upstream from Intelephense. -->
+<!-- - Nova doesn't display the completion hints very well, and some completions may
+  not show at all, due to being overlaid by the suplemental information. -->
 - Language server configurations are not not being detected, and currently fall
   back to defaults.
-- Currently does not support PHP 8.0+. This will be resolved once we upgrade
-  Intelephense to 1.7, which hopefully will resolve some of the other above-
-  mentioned issues as well.
-- The language server currently does not re-index new files. To index them, you
+<!-- - The language server currently does not re-index new files. To index them, you
   must manually restart Intelephense. This is being looked into, and will
-  hopefully be resolved soon.
+  hopefully be resolved soon. -->
 
 ## Commands
 

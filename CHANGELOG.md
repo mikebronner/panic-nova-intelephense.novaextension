@@ -2,6 +2,10 @@
 ## [Upcoming]
 - Add language server configuration settings.
 
+## [0.1.7] - 2022-04-21
+### Removed
+- outdated Known Issues from README.
+
 ## [0.1.6] - 2022-04-21
   ### Updated
   - intelephense version to 1.8.2. This resolved the initialization errors and now
