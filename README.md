@@ -77,7 +77,7 @@ During activation, this extension will attempt to deploy on the workspace a full
 
 In some circumstances (under investigation!), `npm` may fail to create the directories it needs (notably, `node_modules`) in the place where Nova (and, later, Intelephense) expects them; as a consequence, the LSP will fail with a console error that might not be easy to debug — since it depends quite a lot on how you are currently managing `npm`, both at the global as well as the local level.
 
-This step may require some improvement in the future; alternatively, there might be a choice to use the _global_ installation of `npm` instead, or, if you have one local `npm` installation in your current PHP project, this extension might attempt to use it. Such options will require further options on the Preferences panel; stay tuned...
+This step may require some improvement in the future; alternatively, there might be a choice to use the _global_ installation of `npm` instead, or, if you have one local `npm` installation in your current PHP project, this extension might attempt to use it. Such options will require a few new options on the Preferences panel; stay tuned...
 
 <!--
 👋 That's it! Happy developing!
