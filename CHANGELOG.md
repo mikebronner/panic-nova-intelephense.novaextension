@@ -2,14 +2,24 @@
 ## [Upcoming]
 - Add language server configuration settings.
 
+## [0.1.8] - 2022-04-22
+### Changed
+- During the first installation, a `package.json` file will be generated from scratch, in
+  order to allow `npm` to do an installation in the correct place.
+### Fixed
+- Some path names were inconsistent.
+### Updated
+- [README.md](README.md) includes some information about the caveats of the automatic
+  installation process for Inteliphense using `npm`.
+
 ## [0.1.7] - 2022-04-21
 ### Removed
 - outdated Known Issues from README.
 
 ## [0.1.6] - 2022-04-21
-  ### Updated
-  - intelephense version to 1.8.2. This resolved the initialization errors and now
-    also provides PHP 8 support.
+### Updated
+- intelephense version to 1.8.2. This resolved the initialization errors and now
+  also provides PHP 8 support.
 
 ## [0.1.5] - 2021-04-26
 ### Reverted
