@@ -1,32 +1,15 @@
-## Known Issues
-This extension is undergoing development, and probably has errors. The following
-  is a non-exhaustive list of issues being tracked.
-<!-- - There are initialization errors with the language server that are currently
-  unresolved. A future update by the language server may or may not resolve this
-  issue. These issues are likely upstream from Intelephense. -->
-<!-- - Nova doesn't display the completion hints very well, and some completions may
-  not show at all, due to being overlaid by the suplemental information. -->
-- Language server configurations are not not being detected, and currently fall
-  back to defaults.
-<!-- - The language server currently does not re-index new files. To index them, you
-  must manually restart Intelephense. This is being looked into, and will
-  hopefully be resolved soon. -->
-
-## Commands
-
-### Restart Intelephense
-There are two ways you can restart Intelephense:
-- Open command palette and type "Restart Intelephense", then hit enter to execute.
-- Navigate to Extensions > Intelephense > Restart Intelephense.
-
-## Features
-Intelephense runs any time you open a local PHP project, automatically lints all
-  open files, then reports errors and warnings in Nova's **Issues** sidebar and
-  the editor gutter.
+# Intelephense
+[Intelephense](https://intelephense.com) runs any time you open a local PHP
+  project, automatically lints all open files, then reports errors and warnings
+  in Nova's **Issues** sidebar and the editor gutter.
 
 ![](https://nova.app/images/en/dark/tools/sidebars.png)
 
-Further features, as listed on the Intelephense website, include:
+### Prerequisites
+- installation of NPM on your system, for example `brew install npm`.
+
+## Features
+Further features, as listed on the Intelephense website (), include:
 
 ✅ Currently implemented by Nova natively or through this package.
 ☑️ Limited functionality.
@@ -42,7 +25,7 @@ Further features, as listed on the Intelephense website, include:
 | ✅ | Linting | Error tolerant parser and powerful static analysis engine report problems as you type. |
 | ⛔️ | Formatting | PSR12 compatible full document and range formatting. **This does not appear to be available in Nova at this time. |
 | ✅ | Embedded Language Support | Includes HTML/JS/CSS code intelligence too. |
-| ☑️ | Hover | Detailed hover information with links to official PHP documentation. **Nova's implementation does not parse the tooltips in the same manner as VSCode, so the links and other data points aren't formatted or interactive.** |
+| ✅ | Hover | Detailed hover information with links to official PHP documentation. |
 | ⛔️ | Highlight | Smart highlighting of references and keywords. **I don't believe this is currently supported in Nova, or it may be theme-dependent.** |
 
 ### Premium-Only Features
@@ -90,11 +73,13 @@ P.S. If you'd like, you can remove these comments before submitting your extensi
   [Intelephense](https://intelephense.com) language server, which this extension
   uses to provide auto-complete and other LSP features in order to bring Nova on
   par with modern PHP development.
-- I would like to thank [Kristófer Reykjalin](https://extensions.panic.com/extensions/com.thorlaksson/) for inspiration and debugging many
-  of the same errors I have run into ahead of me in various github issues. He has
-  spent a lot of effort in creating an Intelephense extension for Nova, and the
-  only reason I started working on my own extension is because I had some
-  trouble getting his extension to work in my projects. As I am finding out now,
-  this is probably not a problem on his end, but ranter upstream from the
-  Intelephense package. I needed to get Intelephense working quickly in order
-  for me to be able to use Nova as a primary driver.
+- I would like to thank
+  [Kristófer Reykjalin](https://extensions.panic.com/extensions/com.thorlaksson/)
+  for inspiration and debugging many of the same errors I have run into ahead of
+  me in various github issues. He has spent a lot of effort in creating an
+  Intelephense extension for Nova, and the only reason I started working on my
+  own extension is because I had some trouble getting his extension to work in
+  my projects. As I am finding out now, this is probably not a problem on his
+  end, but ranter upstream from the Intelephense package. I needed to get
+  Intelephense working quickly in order for me to be able to use Nova as a
+  primary driver.

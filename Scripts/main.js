@@ -1,25 +1,28 @@
-var workspaceStoragePath = nova.path.join(nova.extension.workspaceStoragePath, "intelephense");
 var globalStoragePath = nova.path.join(nova.extension.globalStoragePath, "intelephense");
 var langserver = null;
-var requiredVersion = "1.8.2";  // for Inteliphense
-var packageJSONfile = nova.path.join(workspaceStoragePath, "package.json"); // Create it if it doesn't exist, or npm will silently fail (gwyneth 20220422)
+var requiredVersion = "1.8.2";
+var workspaceStoragePath = nova.path.join(nova.extension.workspaceStoragePath, "intelephense");
+var packageJsonFile = nova.path.join(workspaceStoragePath, "package.json");
 
 var install = async function () {
     if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
-        console.log("install: Launching 'npm' in directory:", workspaceStoragePath);
+        console.log("Installing via 'npm' in directory: ", workspaceStoragePath);
     }
+
     installation = new Process(
         "/usr/bin/env",
         {
             args: ["npm", "install", "intelephense@" + requiredVersion],
-            cwd: /* nova.extension.workspaceStoragePath */ workspaceStoragePath,
+            cwd: workspaceStoragePath,
         }
     );
+
     installation.onStdout(function (output) {
         if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
             console.log("Installation Output:", output.trim());
         }
     });
+
     installation.onDidExit(function (status) {
         if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
             console.log("Installation completed with status:", status);
@@ -32,19 +35,22 @@ var install = async function () {
         console.log("Starting Intelephense installation.");
     }
 
+    const installNotification = new NotificationRequest(
+        "genealabs.intelephense.installNotification",
+    );
+    installNotification.title = "Installing Intelephense.";
+    installNotification.body = "Inteliphense LSP is being installed.";
+    nova.notifications.add(installNotification);
+
     installation.start();
 };
+
 var installIfMissing = async function () {
-    /* check first if we have a valid `package.json` file in the right place */
-    if (nova.fs.access(packageJSONfile, nova.fs.F_OK) === false) {
+    if (nova.fs.access(packageJsonFile, nova.fs.F_OK) === false) {
         if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
             console.log("installIfMissing: 'package.json' not found, creating a default one.");
         }
-        /*  Now create our own `package.json` from scratch, using the defaults below.
-         *  Note: I'm pretty sure there must be a more idiomatic JS way to do this;
-         *  also: nothing is done concurrently, since this whole function is already async anyway.
-         *  (gwyneth 20220422)
-         */
+
         fileContent = `{
           "name": "` + nova.extension.name + `",
           "description": "` + nova.extension.description + `",
@@ -61,8 +67,9 @@ var installIfMissing = async function () {
           },
           "homepage": "https://extensions.panic.com/extensions/genealabs/genealabs.intelephense/"
         }`;
+
         try {
-            let fileJSON = nova.fs.open(packageJSONfile, 'wt');
+            let fileJSON = nova.fs.open(packageJsonFile, 'wt');
             fileJSON.write(fileContent);
             fileJSON.close();
         } catch(error) {
@@ -74,10 +81,10 @@ var installIfMissing = async function () {
         }
     }
 
-    let installedVersion = "";
     if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
         console.log("installIfMissing: Launching npm in path:", workspaceStoragePath);
     }
+
     let process = new Process(
         "/usr/bin/env",
         {
@@ -85,6 +92,8 @@ var installIfMissing = async function () {
             cwd: /* nova.extension.workspaceStoragePath */ workspaceStoragePath,
         }
     );
+    let installedVersion = "";
+
     process.onStdout(function (output) {
         installedVersion = ((output.split(":")[1] || "").split("@")[1] || "");
 
@@ -92,19 +101,24 @@ var installIfMissing = async function () {
             console.log("installIfMissing: Intelephense currently installed version:", installedVersion);
         }
     })
+
     process.onDidExit(function (status) {
         if (installedVersion !== requiredVersion) {
             install();
 
             return;
         }
+
         if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
             console.log("installIfMissing: Checking installation did complete with status:", status);
         }
+
         langserver = new IntelephenseLanguageServer();
     });
+
     process.start();
 };
+
 var activate = async function () {
     if (nova.config.get('genealabs.intelephense.debugging', 'boolean')) {
         console.log("Activating extension.");
@@ -128,12 +142,14 @@ var activate = async function () {
 
     await installIfMissing();
 };
+
 var deactivate = async function () {
     if (langserver) {
         langserver.deactivate();
         langserver = null;
     }
 };
+
 var restart = async function () {
     await deactivate();
     await activate();
@@ -202,7 +218,7 @@ class IntelephenseLanguageServer {
             initializationOptions: {
                 clearCache: false,
                 globalStoragePath: globalStoragePath,
-                licenseKey: nova.config.get('genealabs.intelephense.licenseKey', 'string'),
+                licenseKey: "",
                 storagePath: workspaceStoragePath,
             },
         };

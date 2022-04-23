@@ -1,16 +1,17 @@
 # Changelog
 ## [Upcoming]
-- Add language server configuration settings.
+### 🎉 Adding
+- language server configuration settings.
 
 ## [0.1.8] - 2022-04-22
-### Changed
-- During the first installation, a `package.json` file will be generated from scratch, in
+### ♻️ Changed
+- installation process to generate a `package.json` file from scratch, in
   order to allow `npm` to do an installation in the correct place.
-### Fixed
-- Some path names were inconsistent.
-### Updated
-- [README.md](README.md) includes some information about the caveats of the automatic
+- [README.md](README.md) to include information about caveats of the automatic
   installation process for Inteliphense using `npm`.
+
+### 🐛 Fixed
+- inconsistent path names.
 
 ## [0.1.7] - 2022-04-21
 ### Removed

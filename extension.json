@@ -39,14 +39,6 @@
 
     "config": [
         {
-            "key": "genealabs.intelephense.licenseKey",
-            "title": "License Key",
-            "link": "https://intelephense.com",
-            "description": "Enter your license key to activate premium features.",
-            "type": "string",
-            "default": ""
-        },
-        {
             "key": "genealabs.intelephense.debugging",
             "title": "Debugging",
             "description": "Show debug logs in Extension Console.",
