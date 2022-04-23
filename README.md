@@ -29,20 +29,9 @@ Further features, as listed on the Intelephense website (), include:
 | ⛔️ | Highlight | Smart highlighting of references and keywords. **I don't believe this is currently supported in Nova, or it may be theme-dependent.** |
 
 ### Premium-Only Features
-Currently the premium features of Intelephense do not appear to be functional in
-  Nova. However, we still encourage you to support Ben Mewburn by purchasing a
-  license. You are able to add the license in the preferences of this extension,
-  in the event that some functionality is unlocked in the future.
-
-| Implemented | Feature | Description |
-| ----------- | ------- | ----------- |
-| ⛔️ | Rename | Easily rename symbols with automatic file/folder renaming too. |
-| ⛔️ | Code Folding | Accurate folding of definitions, blocks, use declarations, heredoc, comments, and custom regions. **Nova provides code folding out of the box, but not quite as granular as Intelephense.** |
-| ⛔️ | Find all Implementations | Quickly find implementations of interfaces, abstract classes and associated methods. **This isn't available in Nova at this time.** |
-| ☑️ | Jump to (type) Definition | Quickly navigate to variables and parameter type definitions. **This is provided by Nova out of the box.** |
-| ☑️ | Go to Declaration | Quickly navigate to interface or abstract method declarations. **In Nova this is the same functionality as "Jump to Definition".** |
-| ⛔️ | Smart Select | Intelligently expand/shrink text selection based on parse tree. |
-| ⛔️ | Code Actions | Import symbols, add (template configurable) PHPDoc, and implement all abstract methods. |
+Currently the premium features of [Intelephense](https://intelephense.com) do
+  not appear to be functional in Nova. However, we still encourage you to
+  support Ben Mewburn by purchasing a license.
 
 ## Configuration
 

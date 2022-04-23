@@ -1,9 +1,9 @@
 # Changelog
 ## [Upcoming]
-### 🎉 Adding
-- language server configuration settings.
 
 ## [0.1.8] - 2022-04-22
+Thanks to @GwynethLlewelyn for this update!
+
 ### ♻️ Changed
 - installation process to generate a `package.json` file from scratch, in
   order to allow `npm` to do an installation in the correct place.
