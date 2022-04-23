@@ -1,7 +1,11 @@
 # Changelog
 ## [Upcoming]
 
-## [0.1.8] - 2022-04-22
+## [0.1.9] - 2022-04-23
+### 🐛 Fixed
+- syntax issue in extension file.
+
+## [0.1.8] - 2022-04-23
 Thanks to @GwynethLlewelyn for this update!
 
 ### ♻️ Changed
