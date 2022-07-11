@@ -1,46 +1,52 @@
 {
-    "identifier": "genealabs.intelephense",
-    "name": "Intelephense",
-    "organization": "GeneaLabs",
-    "description": "Nova wrapper of the fabulous Intelephense language server from Ben Mewburn.",
-    "version": "0.1.9",
-    "categories": ["languages"],
+	"identifier": "genealabs.intelephense",
+	"name": "Intelephense",
+	"organization": "GeneaLabs",
+	"description": "Nova wrapper of the fabulous Intelephense language server from Ben Mewburn.",
+	"version": "0.1.9",
+	"categories": ["languages"],
 
-    "main": "main.js",
+	"main": "main.js",
 
-    "activationEvents": [
-        "onLanguage:php",
-        "onLanguage:blade",
-        "onWorkspaceContains:composer.json",
-        "onWorkspaceContains:phpcs.xml",
-        "onWorkspaceContains:phpmd.xml",
-        "onWorkspaceContains:phpunit.xml"
-    ],
+	"activationEvents": [
+		"onLanguage:php",
+		"onLanguage:blade",
+		"onWorkspaceContains:composer.json",
+		"onWorkspaceContains:phpcs.xml",
+		"onWorkspaceContains:phpmd.xml",
+		"onWorkspaceContains:phpunit.xml"
+	],
 
-    "entitlements": {
-        "process": true,
-        "filesystem": "readwrite"
-    },
+	"entitlements": {
+		"process": true,
+		"filesystem": "readwrite"
+	},
 
-    "bugs": "https://github.com/GeneaLabs/panic-nova-intelephense/issues",
-    "repository": "https://github.com/GeneaLabs/panic-nova-intelephense",
+	"bugs": "https://github.com/GeneaLabs/panic-nova-intelephense/issues",
+	"repository": "https://github.com/GeneaLabs/panic-nova-intelephense",
 
-    "commands": {
-        "extensions": [
-            {
-                "title": "Restart Intelephense",
-                "command": "genealabs.intelephense.restart"
-            }
-        ]
-    },
+	"commands": {
+		"extensions": [
+			{
+				"title": "Restart Intelephense",
+				"command": "genealabs.intelephense.restart"
+			},
 
-    "config": [
-        {
-            "key": "genealabs.intelephense.debugging",
-            "title": "Debugging",
-            "description": "Show debug logs in Extension Console.",
-            "type": "boolean",
-            "default": false
-        }
-    ]
+			{
+				"title": "Intelephense: Enter Licence Key",
+				"command": "intelephense.licence",
+				"when": "userHasLicence"
+			}
+		]
+	},
+
+	"config": [
+		{
+			"key": "genealabs.intelephense.debugging",
+			"title": "Debugging",
+			"description": "Show debug logs in Extension Console.",
+			"type": "boolean",
+			"default": false
+		}
+	]
 }
