@@ -1,4 +1,5 @@
 const Licence = require('./Licence.js')
+var licence = new Licence()
 var globalStoragePath = nova.path.join(
 	nova.extension.globalStoragePath,
 	'intelephense'
@@ -194,18 +195,12 @@ var restart = async function () {
 }
 
 nova.commands.register('genealabs.intelephense.restart', restart)
+nova.commands.register('intelephense.licence', licence.getLicence, licence)
 
 exports.activate = function () {
 	activate()
-
-	// This is to check if the user has a license already
-	const lsLicenceDir = nova.fs.listdir(`${licencePath}`)
-
-	function userHasLicence() {
-		return lsLicenceDir.includes('licence.txt')
-	}
-
-	nova.workspace.config.set('userHasLicence', userHasLicence() ? false : true)
+	// licence.console()
+	nova.workspace.config.set('licenceExists', licence.exists() ? false : true)
 }
 
 exports.deactivate = function () {
@@ -300,36 +295,4 @@ class IntelephenseLanguageServer {
 			this.languageClient = null
 		}
 	}
-}
-
-//check exports.activate()
-const licencePath = nova.path.expanduser('~/intelephense/')
-const homePath = nova.path.expanduser('~/')
-//Licence Key Command getLicence
-//array.includes
-
-nova.commands.register('intelephense.licence', getLicence)
-
-function getLicence(workSpace) {
-	workSpace.showInputPalette(
-		'Type in your intelephense Licence Key',
-		{
-			placeholder: 'XXXXXXXXX',
-		},
-		registerLicence
-	)
-}
-
-function registerLicence(licenceKey) {
-	// you need to check if directory exists if not make one
-	let lsHomeDir = nova.fs.listdir(homePath)
-
-	if (!lsHomeDir.includes('intelephense')) {
-		nova.fs.mkdir(`${homePath}/intelephense`)
-	}
-
-	let licence = nova.fs.open(`${licencePath}/licence.txt`, 'x')
-	licence.write(licenceKey.trim())
-	licence.close()
-	restart()
 }

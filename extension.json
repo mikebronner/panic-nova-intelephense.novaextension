@@ -35,7 +35,7 @@
 			{
 				"title": "Intelephense: Enter Licence Key",
 				"command": "intelephense.licence",
-				"when": "userHasLicence"
+				"when": "licenceExists"
 			}
 		]
 	},
