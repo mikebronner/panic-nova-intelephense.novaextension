@@ -2,7 +2,7 @@
 ## [Upcoming]
 
 ## [0.2.0] - 2023-08-30
-- added configurations for Intelephense, accessible from the Extension Preferences panel.
+- added configurations for Intelephense, accessible from the Extension Preferences tab.
 
 ## [0.1.9] - 2022-04-23
 ### 🐛 Fixed
