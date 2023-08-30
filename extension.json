@@ -45,7 +45,7 @@
         {
             "key": "intelephense.files.associations",
             "title": "Files associations",
-            "type": "array",
+            "type": "stringArray",
             "default": [
                 "*.php",
                 "*.phtml"
@@ -64,7 +64,7 @@
         {
             "key": "intelephense.files.exclude",
             "title": "Exclude files",
-            "type": "array",
+            "type": "stringArray",
             "items": {
                 "type": "string"
             },
@@ -86,7 +86,7 @@
         {
             "key": "intelephense.stubs",
             "title": "Stubs",
-            "type": "array",
+            "type": "stringArray",
             "items": {
                 "type": "string",
                 "enum": [
@@ -316,7 +316,7 @@
         {
             "key": "intelephense.environment.includePaths",
             "title": "Include paths",
-            "type": "array",
+            "type": "stringArray",
             "items": {
                 "type": "string"
             },
