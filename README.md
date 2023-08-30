@@ -17,16 +17,17 @@ Further features, as listed on the Intelephense website (), include:
 
 | Implemented | Feature | Description |
 | ----------- | ------- | ----------- |
-| ✅ | Code Completion | Fast camel/underscore case context aware suggestions  _with automatic addition of use declarations_. |
+| ✅ | Code Completion | Fast camel/underscore case context aware suggestions _with automatic addition of use declarations_. |
 | ✅ | Signature Help | View detailed parameter hints for call expressions. |
 | ✅ | Jump to Definition | Quickly navigate to symbol definitions. |
 | ✅ | Find in Project | Quickly find symbol references within the workspace. |
 | ☑️ | Symbol Search | Fast camel/underscore text search for workspace and document symbol definitions. **In Nova this is included in the "Find in Project" functionality.** |
 | ✅ | Linting | Error tolerant parser and powerful static analysis engine report problems as you type. |
-| ⛔️ | Formatting | PSR12 compatible full document and range formatting. **This does not appear to be available in Nova at this time. |
+| ⛔️ | Formatting | PSR12 compatible full document and range formatting. **This does not appear to be available in Nova at this time.** |
 | ✅ | Embedded Language Support | Includes HTML/JS/CSS code intelligence too. |
 | ✅ | Hover | Detailed hover information with links to official PHP documentation. |
 | ⛔️ | Highlight | Smart highlighting of references and keywords. **I don't believe this is currently supported in Nova, or it may be theme-dependent.** |
+| ✅ | Sending configuration to LSP | From the Extension Preferences tab, configure directly the [parameters to pass on to Intelephense](https://github.com/bmewburn/intelephense-docs/blob/master/gettingStarted.md). |
 
 ### Premium-Only Features
 Currently the premium features of [Intelephense](https://intelephense.com) do
@@ -42,6 +43,8 @@ Currently the premium features of [Intelephense](https://intelephense.com) do
 To configure global preferences, open **Extensions → Extension Library...** then select intelephense's **Preferences** tab.
 
 You can also configure preferences on a per-project basis in **Project → Project Settings...**
+
+Finally, note that the additional preferences found on the **Preferences** tab relate to Intelephense-specific configurations. See Ben Mewburn's [own explanations](https://github.com/bmewburn/intelephense-docs/blob/master/gettingStarted.md) for further information on what each option does.
 
 ## Caveats
 
@@ -69,6 +72,9 @@ P.S. If you'd like, you can remove these comments before submitting your extensi
   Intelephense extension for Nova, and the only reason I started working on my
   own extension is because I had some trouble getting his extension to work in
   my projects. As I am finding out now, this is probably not a problem on his
-  end, but ranter upstream from the Intelephense package. I needed to get
+  end, but rather upstream from the Intelephense package. I needed to get
   Intelephense working quickly in order for me to be able to use Nova as a
   primary driver.
+- Additional thanks to [John Fieber](https://devforum.nova.app/u/jrf/) for his
+  extensive explanation on how exactly Nova passes configurations to the LSP
+  (and answers its requests).
